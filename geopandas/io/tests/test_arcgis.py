@@ -69,7 +69,7 @@ def test_from_arcgis_sedf_sanity():
     ny_sedf = pd.DataFrame.spatial.from_featureclass(ny_shp)
 
     # convert SeDF to GDF
-    ny_gdf = GeoDataFrame.read_arcgis_sedf()
+    ny_gdf = GeoDataFrame.read_arcgis_sedf(ny_sedf)
 
     # assert instance type
     assert isinstance(ny_gdf, GeoDataFrame)

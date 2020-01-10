@@ -89,6 +89,32 @@ def read_file(filename, bbox=None, **kwargs):
     return gdf
 
 
+def read_arcgis_sedf(df):
+    """
+    Returns a GeoDataFrame from an ArcGIS Spatially Enabled DataFrame object.
+
+    **Note**: This functionality requires the ArcGIS API for Python to be installed.
+    You can get the free library by typing `conda install -c esri arcgis` in your
+    command prompt or terminal.
+
+    Parameters
+    ----------
+    df: pandas DataFrame
+        A Spatially Enabled DataFrame object as seen in:
+        https://developers.arcgis.com/python/guide/introduction-to-the-spatially-enabled-dataframe/
+
+    Examples
+    --------
+    >>> from arcgis.gis import GIS
+    >>> from arcgis.features import GeoAccessor
+    >>> anon_gis = GIS()
+    >>> cities_item = gis.content.get("85d0ca4ea1ca4b9abf0c51b9bd34de2e") # Major cities item
+    >>> cities_sedf = pd.DataFrame.spatial.from_layer(cities_item.layers[0]) # read first feature layer into SeDF
+    >>>
+    >>> cities_gdf = geopandas.read_arcgis_sedf(cities_sedf) # convert SeDF to GDF
+    """
+    return None
+
 def to_file(df, filename, driver="ESRI Shapefile", schema=None, **kwargs):
     """
     Write this GeoDataFrame to an OGR data source
