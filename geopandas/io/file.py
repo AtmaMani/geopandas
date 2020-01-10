@@ -89,7 +89,7 @@ def read_file(filename, bbox=None, **kwargs):
     return gdf
 
 
-def read_arcgis_sedf(df):
+def read_arcgis_sedf(sedf):
     """
     Returns a GeoDataFrame from an ArcGIS Spatially Enabled DataFrame object.
 
@@ -99,7 +99,7 @@ def read_arcgis_sedf(df):
 
     Parameters
     ----------
-    df: pandas DataFrame
+    sedf: pandas DataFrame
         A Spatially Enabled DataFrame object as seen in:
         https://developers.arcgis.com/python/guide/introduction-to-the-spatially-enabled-dataframe/
 
@@ -113,7 +113,24 @@ def read_arcgis_sedf(df):
     >>>
     >>> cities_gdf = geopandas.read_arcgis_sedf(cities_sedf) # convert SeDF to GDF
     """
-    return None
+
+    try:
+        import arcgis
+        from arcgis.features import GeoAccessor
+    except ImportError:
+        raise ImportError('Requires arcgis library installed for this functionality')
+
+    # convert SeDF to FeatureSet, so you can export to GeoJSON
+    fset = sedf.to_featureset()
+
+    # read GeoJSON into a dictionary
+    import json
+    geojson_dict = json.loads(fset.to_geojson)
+
+    # create gpd DF
+    geo_df = GeoDataFrame.from_features(geojson_dict['features'])
+
+    return geo_df
 
 def to_file(df, filename, driver="ESRI Shapefile", schema=None, **kwargs):
     """
