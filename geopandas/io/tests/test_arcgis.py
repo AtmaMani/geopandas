@@ -43,7 +43,7 @@ def df_points():
 # to_arcgis_sedf tests
 # -----------------------------------------------------------------------------
 
-@pytest.mark.skipif(skip_ags_tests, "ArcGIS conda pkg needed")
+@pytest.mark.skipif(skip_ags_tests, reason="ArcGIS conda pkg needed")
 def test_to_arcgis_sedf_sanity():
     # get NY GeoDataFrame
     ny_gdf = df_nybb()
@@ -60,7 +60,7 @@ def test_to_arcgis_sedf_sanity():
 # -----------------------------------------------------------------------------
 # from_arcgis_sedf tests
 # -----------------------------------------------------------------------------
-@pytest.mark.skipif(skip_ags_tests, "ArcGIS conda pkg needed")
+@pytest.mark.skipif(skip_ags_tests, reason="ArcGIS conda pkg needed")
 def test_from_arcgis_sedf_sanity():
     # get NY shape file path
     ny_shp = geopandas.datasets.get_path('nybb')

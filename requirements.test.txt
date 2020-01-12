@@ -9,3 +9,4 @@ pytest-cov
 codecov
 rtree>=0.8
 mapclassify
+arcgis>=1.6.0  # for IO with ArcGIS SeDF
